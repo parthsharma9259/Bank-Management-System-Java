@@ -21,9 +21,9 @@ public class BankManager {
 
             for (BankAccount account : accounts) {
                 writer.write(account.accountNumber + "," +
-                        account.accountHolderName + "," +
-                        account.balance);
-                writer.newLine();
+        account.accountHolderName + "," +
+        account.balance + "," +
+        account.pin);
             }
 
             writer.close();
@@ -60,11 +60,14 @@ public class BankManager {
 
                 double balance =
                         Double.parseDouble(data[2]);
+                        int pin =
+        Integer.parseInt(data[3]);
 
                 accounts.add(
-                        new BankAccount(accountNumber,
-                                name,
-                                balance)
+                       new BankAccount(accountNumber,
+        name,
+        balance,
+        pin)
                 );
             }
 
@@ -89,8 +92,15 @@ public class BankManager {
         double balance =
                 Double.parseDouble(sc.nextLine().trim());
 
+                System.out.print("Set 4 Digit PIN: ");
+int pin =
+        Integer.parseInt(sc.nextLine().trim());
+
         BankAccount account =
-                new BankAccount(accountNumber, name, balance);
+        new BankAccount(accountNumber,
+                name,
+                balance,
+                pin);
 
         accounts.add(account);
 
@@ -135,6 +145,14 @@ public class BankManager {
             System.out.println("Account Not Found!");
         }
     }
+    boolean verifyPin(BankAccount account) {
+
+    System.out.print("Enter PIN: ");
+    int enteredPin =
+            Integer.parseInt(sc.nextLine().trim());
+
+    return account.pin == enteredPin;
+}
 
     // Deposit Money
     void depositMoney() {
@@ -149,6 +167,10 @@ public class BankManager {
 
             if (account.accountNumber == accountNumber) {
 
+                if (!verifyPin(account)) {
+    System.out.println("Wrong PIN!");
+    return;
+}
                 System.out.print("Enter Amount to Deposit: ");
                 double amount =
                         Double.parseDouble(sc.nextLine().trim());
@@ -183,6 +205,10 @@ public class BankManager {
         for (BankAccount account : accounts) {
 
             if (account.accountNumber == accountNumber) {
+                if (!verifyPin(account)) {
+    System.out.println("Wrong PIN!");
+    return;
+}
 
                 System.out.print("Enter Amount to Withdraw: ");
                 double amount =
@@ -225,6 +251,10 @@ public class BankManager {
         for (BankAccount account : accounts) {
 
             if (account.accountNumber == accountNumber) {
+                if (!verifyPin(account)) {
+    System.out.println("Wrong PIN!");
+    return;
+}
 
                 System.out.println("Current Balance: ₹" +
                         account.balance);
@@ -251,6 +281,10 @@ public class BankManager {
         for (int i = 0; i < accounts.size(); i++) {
 
             if (accounts.get(i).accountNumber == accountNumber) {
+                if (!verifyPin(accounts.get(i))) {
+    System.out.println("Wrong PIN!");
+    return;
+}
 
                 accounts.remove(i);
 
