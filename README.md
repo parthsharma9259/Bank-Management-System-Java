@@ -19,6 +19,9 @@
 ✅ Check Balance  
 ✅ Delete Account  
 ✅ File Handling (Permanent Save)
+✅ PIN Security System  
+✅ Secure Deposit & Withdrawal  
+✅ Protected Balance Check
 
 ---
 
